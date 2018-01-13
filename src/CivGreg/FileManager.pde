@@ -37,7 +37,7 @@ void saveGame(String filename) {
   filetosave[0]= playernumber+"@nx@"+playerMoves+"@nx@"+(classicMode?"classic":"normal")+"@nx@"+playersNumber;
   for (int x = 0; x<16; x++) {
     for (int y = 0; y<12; y++) {
-      filetosave[x*12+y+1]= map[x][y].name+"@nx@"+map[x][y].population+"@nx@"+map[x][y].owner+"@nx@"+map[x][y].terrain+"@nx@"+map[x][y].fort;
+      filetosave[x*12+y+1]= map[x][y].population+"@nx@"+map[x][y].owner+"@nx@"+map[x][y].terrain+"@nx@"+map[x][y].fort;
     }
   }
   saveStrings("saves/"+filename+".txt", filetosave);
@@ -54,11 +54,10 @@ void loadGame(String filename) {
     String[] row = maploaded[i].split("@nx@");
     int x=((i-1)-((i-1)%12))/12;
     int y=((i-1)%12);
-    map[x][y].name=row[0];
-    map[x][y].population=int(row[1]);
-    map[x][y].owner=int(row[2]);
-    map[x][y].terrain=row[3];
-    map[x][y].fort=int(row[4]);
+    map[x][y].population=int(row[0]);
+    map[x][y].owner=int(row[1]);
+    map[x][y].terrain=row[2];
+    map[x][y].fort=int(row[3]);
   }
   winnum = 1;
 }
