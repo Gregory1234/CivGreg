@@ -14,20 +14,22 @@ PImage fort19;
 
 PImage waterTile;
 
+String respath = "../../res/";
+
 void loadImages(){
-  blankman = loadImage("resources/images/blankman.png");
-  angryman = loadImage("resources/images/angryman.png");
+  blankman = loadImage(respath+"images/blankman.png");
+  angryman = loadImage(respath+"images/angryman.png");
   
-  fort1 = loadImage("resources/images/fort1.png");
-  fort2 = loadImage("resources/images/fort2.png");
-  fort3 = loadImage("resources/images/fort3.png");
-  fort5 = loadImage("resources/images/fort5.png");
-  fort7 = loadImage("resources/images/fort7.png");
-  fort11 = loadImage("resources/images/fort11.png");
-  fort13 = loadImage("resources/images/fort13.png");
-  fort17 = loadImage("resources/images/fort17.png");
+  fort1 = loadImage(respath+"images/fort1.png");
+  fort2 = loadImage(respath+"images/fort2.png");
+  fort3 = loadImage(respath+"images/fort3.png");
+  fort5 = loadImage(respath+"images/fort5.png");
+  fort7 = loadImage(respath+"images/fort7.png");
+  fort11 = loadImage(respath+"images/fort11.png");
+  fort13 = loadImage(respath+"images/fort13.png");
+  fort17 = loadImage(respath+"images/fort17.png");
   
-  waterTile = loadImage("resources/images/water.png");
+  waterTile = loadImage(respath+"images/water.png");
 }
 
 void saveGame(String filename){

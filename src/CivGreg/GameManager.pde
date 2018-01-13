@@ -8,35 +8,9 @@ int playerMoves= 2;
 boolean classicMode = false;
 boolean isWater = true;
 
-public class Building{
-  public String name;
-  public int level;
-  public PImage big,small;
-  public Building(String name,int level,String big,String small){
-    this.name=name;
-    this.level=level;
-    this.big = loadImage("resources/images/buildings/big/"+big);
-    this.small = loadImage("resources/images/buildings/small/"+small);
-  }
-  public Building(String name,int level,PImage big,PImage small){
-    this.name=name;
-    this.level=level;
-    this.big = big;
-    this.small = small;
-  }
-  public Building clone(){
-    return new Building(name,level,big,small);
-  }
-  @Override
-  public boolean equals(Object o){
-    return o instanceof Building &&(((Building)o).name==name);
-  }
-}
-
 public class Province{
   public String name,terrain;
   public int population,owner,fort;
-  public ArrayList<Building> buildings = new ArrayList<Building>();
   public Province(String name,int population,int owner,String terrain,int fort){
     this.name=name;
     this.population=population;
@@ -46,7 +20,6 @@ public class Province{
   }
 }
 
-ArrayList<Building> buildings = new ArrayList<Building>();
 String[] players = {"No Owner","Red","Blue","Green","Yellow","Purple"};
 
 Province[][] map = new Province[16][12];
@@ -75,7 +48,6 @@ void initMap(){
   if(playersNumber>=5){
     map[7][5]=new Province("Purple's first province",1000,5,"Plains",1);  
   }
-  buildings.add(new Building("Port",0,"port.png","port.png"));
 }
 
 void nextTurn(){
@@ -264,14 +236,6 @@ void movePeopleFromSelectedAction(){
     else if(mapselectedY>0 && map[mapselectedX][mapselectedY-1].owner==playernumber&&mouseX>375+38+37+38){
       map[mapselectedX][mapselectedY-1].population+=100;
       map[mapselectedX][mapselectedY].population-=100;
-      playerMoves--;
-    }
-  }
-}
-void buildSelectedAction(int b){
-  if(map[mapselectedX][mapselectedY].owner==playernumber){
-    if(!map[mapselectedX][mapselectedY].buildings.contains(buildings.get(b))){
-      map[mapselectedX][mapselectedY].buildings.add(buildings.get(b).clone());
       playerMoves--;
     }
   }

@@ -4,7 +4,7 @@ int n;
 int m;
 int i=0;
 
-String version = "1.3.0";
+String version = "Alpha 1.0";
 
 int clickDelay = 20;
 
@@ -273,14 +273,6 @@ void showActions(){
     
   }
   else if(actiontab==1){
-    for(int b = 0;b<buildings.size();b++){
-      fill(255);
-      rect(b*110+10,625,100,150);
-      fill(0);
-      textSize(20);
-      text(buildings.get(b).name,b*110+15,760);
-      image(buildings.get(b).big,b*110+10,625);
-    }
     fill(255);
     rect(520,600,150,25);
     fill(0);
@@ -331,13 +323,6 @@ void clickActions(){
     if(mouseX>520&&mouseX<520+150){
       if(mouseY>600&&mouseY<600+25){
         actiontab=0;
-      }
-    }
-    for(int b = 0;b<buildings.size();b++){
-      if(mouseX>b*110+10&&mouseX<b*110+10+100){
-        if(mouseY>625&&mouseY<625+150){
-          buildSelectedAction(b);
-        }
       }
     }
   }

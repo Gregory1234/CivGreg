@@ -1,2 +1,2 @@
 # GregCiv
-GregCiv is a 2d strategy game.
+CivGreg is a 2d strategy game.
