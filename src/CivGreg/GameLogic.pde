@@ -9,6 +9,8 @@ boolean classicMode = false;
 boolean isWater = true;
 
 
+int selX = 0;
+int selY = 0;
 
 void nextTurn() {
 
@@ -38,10 +40,10 @@ void nextTurn() {
 void buildFortsAction() {
   if (mouseX>375&&mouseX<395) {
     if (mouseY>685&&mouseY<685+25) {
-      if (map[mapselectedX][mapselectedY].owner==playernumber) {
-        if (map[mapselectedX][mapselectedY].fort>0&&playerMoves>=map[mapselectedX][mapselectedY].fort-1) {
-          map[mapselectedX][mapselectedY].fort--;
-          playerMoves-=map[mapselectedX][mapselectedY].fort;
+      if (map[selX][selY].owner==playernumber) {
+        if (map[selX][selY].fort>0&&playerMoves>=map[selX][selY].fort-1) {
+          map[selX][selY].fort--;
+          playerMoves-=map[selX][selY].fort;
         }
       }
     }
@@ -49,10 +51,10 @@ void buildFortsAction() {
 
   if (mouseX>375+150-20&&mouseX<395+150) {
     if (mouseY>685&&mouseY<685+25) {
-      if (map[mapselectedX][mapselectedY].owner==playernumber) {
-        if (playerMoves>=map[mapselectedX][mapselectedY].fort+1) {
-          map[mapselectedX][mapselectedY].fort++;
-          playerMoves-=map[mapselectedX][mapselectedY].fort;
+      if (map[selX][selY].owner==playernumber) {
+        if (playerMoves>=map[selX][selY].fort+1) {
+          map[selX][selY].fort++;
+          playerMoves-=map[selX][selY].fort;
         }
       }
     }
@@ -60,98 +62,98 @@ void buildFortsAction() {
 }
 
 void attackSelectedAction() {
-  if (map[mapselectedX][mapselectedY].owner!=playernumber) {
+  if (map[selX][selY].owner!=playernumber) {
     if (classicMode) {
-      if (map[mapselectedX][mapselectedY].terrain!="Water") {
-        if (mapselectedX>0 && map[mapselectedX-1][mapselectedY].owner==playernumber&&map[mapselectedX-1][mapselectedY].population>=100) {
-          map[mapselectedX][mapselectedY].owner=playernumber;
-          map[mapselectedX-1][mapselectedY].population-=100;
-          map[mapselectedX][mapselectedY].population+=100;
+      if (map[selX][selY].terrain!="Water") {
+        if (selX>0 && map[selX-1][selY].owner==playernumber&&map[selX-1][selY].population>=100) {
+          map[selX][selY].owner=playernumber;
+          map[selX-1][selY].population-=100;
+          map[selX][selY].population+=100;
           playerMoves--;
-        } else if (mapselectedX<15 && map[mapselectedX+1][mapselectedY].owner==playernumber&&map[mapselectedX+1][mapselectedY].population>=100) {
-          map[mapselectedX][mapselectedY].owner=playernumber;
-          map[mapselectedX+1][mapselectedY].population-=100;
-          map[mapselectedX][mapselectedY].population+=100;
+        } else if (selX<15 && map[selX+1][selY].owner==playernumber&&map[selX+1][selY].population>=100) {
+          map[selX][selY].owner=playernumber;
+          map[selX+1][selY].population-=100;
+          map[selX][selY].population+=100;
           playerMoves--;
-        } else if (mapselectedY>0 && map[mapselectedX][mapselectedY-1].owner==playernumber&&map[mapselectedX][mapselectedY-1].population>=100) {
-          map[mapselectedX][mapselectedY].owner=playernumber;
-          map[mapselectedX][mapselectedY-1].population-=100;
-          map[mapselectedX][mapselectedY].population+=100;
+        } else if (selY>0 && map[selX][selY-1].owner==playernumber&&map[selX][selY-1].population>=100) {
+          map[selX][selY].owner=playernumber;
+          map[selX][selY-1].population-=100;
+          map[selX][selY].population+=100;
           playerMoves--;
-        } else if (mapselectedY<11 && map[mapselectedX][mapselectedY+1].owner==playernumber&&map[mapselectedX][mapselectedY+1].population>=100) {
-          map[mapselectedX][mapselectedY].owner=playernumber;
-          map[mapselectedX][mapselectedY].population+=100;
-          map[mapselectedX][mapselectedY+1].population-=100;
+        } else if (selY<11 && map[selX][selY+1].owner==playernumber&&map[selX][selY+1].population>=100) {
+          map[selX][selY].owner=playernumber;
+          map[selX][selY].population+=100;
+          map[selX][selY+1].population-=100;
           playerMoves--;
         }
       }
     } else {
-      if (map[mapselectedX][mapselectedY].terrain!="Water") {
-        if (mapselectedX>0 && map[mapselectedX-1][mapselectedY].owner==playernumber&&map[mapselectedX-1][mapselectedY].population>=100) {
-          if (map[mapselectedX][mapselectedY].owner==0) {
-            map[mapselectedX][mapselectedY].owner=playernumber;
-            map[mapselectedX-1][mapselectedY].population-=100;
-            map[mapselectedX][mapselectedY].population=100;
+      if (map[selX][selY].terrain!="Water") {
+        if (selX>0 && map[selX-1][selY].owner==playernumber&&map[selX-1][selY].population>=100) {
+          if (map[selX][selY].owner==0) {
+            map[selX][selY].owner=playernumber;
+            map[selX-1][selY].population-=100;
+            map[selX][selY].population=100;
           } else {
-            if (map[mapselectedX][mapselectedY].population*(1+map[mapselectedX][mapselectedY].fort/10)<map[mapselectedX-1][mapselectedY].population) {
-              map[mapselectedX][mapselectedY].population=map[mapselectedX-1][mapselectedY].population-map[mapselectedX][mapselectedY].population;
-              map[mapselectedX-1][mapselectedY].population=0;
-              map[mapselectedX][mapselectedY].owner=playernumber;
-              map[mapselectedX][mapselectedY].fort=map[mapselectedX][mapselectedY].fort==0?0:map[mapselectedX][mapselectedY].fort-1;
+            if (map[selX][selY].population*(1+map[selX][selY].fort/10)<map[selX-1][selY].population) {
+              map[selX][selY].population=map[selX-1][selY].population-map[selX][selY].population;
+              map[selX-1][selY].population=0;
+              map[selX][selY].owner=playernumber;
+              map[selX][selY].fort=map[selX][selY].fort==0?0:map[selX][selY].fort-1;
             } else {
-              map[mapselectedX][mapselectedY].population=map[mapselectedX][mapselectedY].population-map[mapselectedX-1][mapselectedY].population;
-              map[mapselectedX-1][mapselectedY].population=0;
+              map[selX][selY].population=map[selX][selY].population-map[selX-1][selY].population;
+              map[selX-1][selY].population=0;
             }
           }
           playerMoves--;
-        } else if (mapselectedX<15 && map[mapselectedX+1][mapselectedY].owner==playernumber&&map[mapselectedX+1][mapselectedY].population>=100) {
-          if (map[mapselectedX][mapselectedY].owner==0) {
-            map[mapselectedX][mapselectedY].owner=playernumber;
-            map[mapselectedX+1][mapselectedY].population-=100;
-            map[mapselectedX][mapselectedY].population=100;
+        } else if (selX<15 && map[selX+1][selY].owner==playernumber&&map[selX+1][selY].population>=100) {
+          if (map[selX][selY].owner==0) {
+            map[selX][selY].owner=playernumber;
+            map[selX+1][selY].population-=100;
+            map[selX][selY].population=100;
           } else {
-            if (map[mapselectedX][mapselectedY].population*(1+map[mapselectedX][mapselectedY].fort/10)<map[mapselectedX+1][mapselectedY].population) {
-              map[mapselectedX][mapselectedY].population=map[mapselectedX+1][mapselectedY].population-map[mapselectedX][mapselectedY].population;
-              map[mapselectedX+1][mapselectedY].population=0;
-              map[mapselectedX][mapselectedY].owner=playernumber;
-              map[mapselectedX][mapselectedY].fort=map[mapselectedX][mapselectedY].fort==0?0:map[mapselectedX][mapselectedY].fort-1;
+            if (map[selX][selY].population*(1+map[selX][selY].fort/10)<map[selX+1][selY].population) {
+              map[selX][selY].population=map[selX+1][selY].population-map[selX][selY].population;
+              map[selX+1][selY].population=0;
+              map[selX][selY].owner=playernumber;
+              map[selX][selY].fort=map[selX][selY].fort==0?0:map[selX][selY].fort-1;
             } else {
-              map[mapselectedX][mapselectedY].population=map[mapselectedX][mapselectedY].population-map[mapselectedX+1][mapselectedY].population;
-              map[mapselectedX+1][mapselectedY].population=0;
+              map[selX][selY].population=map[selX][selY].population-map[selX+1][selY].population;
+              map[selX+1][selY].population=0;
             }
           }
           playerMoves--;
-        } else if (mapselectedY>0 && map[mapselectedX][mapselectedY-1].owner==playernumber&&map[mapselectedX][mapselectedY-1].population>=100) {
-          if (map[mapselectedX][mapselectedY].owner==0) {
-            map[mapselectedX][mapselectedY].owner=playernumber;
-            map[mapselectedX][mapselectedY-1].population-=100;
-            map[mapselectedX][mapselectedY].population=100;
+        } else if (selY>0 && map[selX][selY-1].owner==playernumber&&map[selX][selY-1].population>=100) {
+          if (map[selX][selY].owner==0) {
+            map[selX][selY].owner=playernumber;
+            map[selX][selY-1].population-=100;
+            map[selX][selY].population=100;
           } else {
-            if (map[mapselectedX][mapselectedY].population*(1+map[mapselectedX][mapselectedY].fort/10)<map[mapselectedX][mapselectedY-1].population) {
-              map[mapselectedX][mapselectedY].population=map[mapselectedX][mapselectedY-1].population-map[mapselectedX][mapselectedY].population;
-              map[mapselectedX][mapselectedY-1].population=0;
-              map[mapselectedX][mapselectedY].owner=playernumber;
-              map[mapselectedX][mapselectedY].fort=map[mapselectedX][mapselectedY].fort==0?0:map[mapselectedX][mapselectedY].fort-1;
+            if (map[selX][selY].population*(1+map[selX][selY].fort/10)<map[selX][selY-1].population) {
+              map[selX][selY].population=map[selX][selY-1].population-map[selX][selY].population;
+              map[selX][selY-1].population=0;
+              map[selX][selY].owner=playernumber;
+              map[selX][selY].fort=map[selX][selY].fort==0?0:map[selX][selY].fort-1;
             } else {
-              map[mapselectedX][mapselectedY].population=map[mapselectedX][mapselectedY].population-map[mapselectedX][mapselectedY-1].population;
-              map[mapselectedX][mapselectedY-1].population=0;
+              map[selX][selY].population=map[selX][selY].population-map[selX][selY-1].population;
+              map[selX][selY-1].population=0;
             }
           }
           playerMoves--;
-        } else if (mapselectedY<11 && map[mapselectedX][mapselectedY+1].owner==playernumber&&map[mapselectedX][mapselectedY+1].population>=100) {
-          if (map[mapselectedX][mapselectedY].owner==0) {
-            map[mapselectedX][mapselectedY].owner=playernumber;
-            map[mapselectedX][mapselectedY+1].population-=100;
-            map[mapselectedX][mapselectedY].population=100;
+        } else if (selY<11 && map[selX][selY+1].owner==playernumber&&map[selX][selY+1].population>=100) {
+          if (map[selX][selY].owner==0) {
+            map[selX][selY].owner=playernumber;
+            map[selX][selY+1].population-=100;
+            map[selX][selY].population=100;
           } else {
-            if (map[mapselectedX][mapselectedY].population*(1+map[mapselectedX][mapselectedY].fort/10)<map[mapselectedX][mapselectedY+1].population) {
-              map[mapselectedX][mapselectedY].population=map[mapselectedX][mapselectedY+1].population-map[mapselectedX][mapselectedY].population;
-              map[mapselectedX][mapselectedY+1].population=0;
-              map[mapselectedX][mapselectedY].owner=playernumber;
-              map[mapselectedX][mapselectedY].fort=map[mapselectedX][mapselectedY].fort==0?0:map[mapselectedX][mapselectedY].fort-1;
+            if (map[selX][selY].population*(1+map[selX][selY].fort/10)<map[selX][selY+1].population) {
+              map[selX][selY].population=map[selX][selY+1].population-map[selX][selY].population;
+              map[selX][selY+1].population=0;
+              map[selX][selY].owner=playernumber;
+              map[selX][selY].fort=map[selX][selY].fort==0?0:map[selX][selY].fort-1;
             } else {
-              map[mapselectedX][mapselectedY].population=map[mapselectedX][mapselectedY].population-map[mapselectedX][mapselectedY+1].population;
-              map[mapselectedX][mapselectedY+1].population=0;
+              map[selX][selY].population=map[selX][selY].population-map[selX][selY+1].population;
+              map[selX][selY+1].population=0;
             }
           }
           playerMoves--;
@@ -161,22 +163,22 @@ void attackSelectedAction() {
   }
 }
 void movePeopleFromSelectedAction() {
-  if (map[mapselectedX][mapselectedY].owner==playernumber&&map[mapselectedX][mapselectedY].population>=100) {
-    if (mapselectedX>0 && map[mapselectedX-1][mapselectedY].owner==playernumber&&mouseX<375+38) {
-      map[mapselectedX-1][mapselectedY].population+=100;
-      map[mapselectedX][mapselectedY].population-=100;
+  if (map[selX][selY].owner==playernumber&&map[selX][selY].population>=100) {
+    if (selX>0 && map[selX-1][selY].owner==playernumber&&mouseX<375+38) {
+      map[selX-1][selY].population+=100;
+      map[selX][selY].population-=100;
       playerMoves--;
-    } else if (mapselectedY<11 && map[mapselectedX][mapselectedY+1].owner==playernumber&&mouseX<375+38+37&&mouseX>375+38) {
-      map[mapselectedX][mapselectedY].population-=100;
-      map[mapselectedX][mapselectedY+1].population+=100;
+    } else if (selY<11 && map[selX][selY+1].owner==playernumber&&mouseX<375+38+37&&mouseX>375+38) {
+      map[selX][selY].population-=100;
+      map[selX][selY+1].population+=100;
       playerMoves--;
-    } else if (mapselectedX<15 && map[mapselectedX+1][mapselectedY].owner==playernumber&&mouseX<375+38+37+38&&mouseX>375+38+37) {
-      map[mapselectedX+1][mapselectedY].population+=100;
-      map[mapselectedX][mapselectedY].population-=100;
+    } else if (selX<15 && map[selX+1][selY].owner==playernumber&&mouseX<375+38+37+38&&mouseX>375+38+37) {
+      map[selX+1][selY].population+=100;
+      map[selX][selY].population-=100;
       playerMoves--;
-    } else if (mapselectedY>0 && map[mapselectedX][mapselectedY-1].owner==playernumber&&mouseX>375+38+37+38) {
-      map[mapselectedX][mapselectedY-1].population+=100;
-      map[mapselectedX][mapselectedY].population-=100;
+    } else if (selY>0 && map[selX][selY-1].owner==playernumber&&mouseX>375+38+37+38) {
+      map[selX][selY-1].population+=100;
+      map[selX][selY].population-=100;
       playerMoves--;
     }
   }

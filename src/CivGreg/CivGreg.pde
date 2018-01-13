@@ -1,17 +1,12 @@
 import java.awt.*;
 
-String version = "Alpha v1.1";
 
 int clickDelay = 20;
 
-int mapselectedX = 0;
-int mapselectedY = 0;
 void setup() {
-
   loadImages();
   size(800, 800);
   textSize(32);
-
   initMap();
 }
 void draw() {
@@ -22,7 +17,7 @@ void draw() {
   fill(0);
   switch(winnum) {
   case 0:
-    showmenu();
+    drawMenu();
     break;
   case 1:
     if (classicMode) {
@@ -32,10 +27,10 @@ void draw() {
         }
       }
     }
-    showgame();
+    drawGame();
     break;
   case 2:
-    showcreatemenu();
+    drawCreatingMenu();
     break;
   }
 }
@@ -51,8 +46,8 @@ void mouseClicked(MouseEvent e) {
       }
     } else if (winnum==1) {
       if (mouseY<600&&mouseY>0&&mouseX<800&&mouseX>0) {
-        mapselectedX=mouseX/50;
-        mapselectedY=mouseY/50;
+        selX=mouseX/50;
+        selY=mouseY/50;
       }
       if (mouseY>600) {
         if (playerMoves>0) {
@@ -103,8 +98,8 @@ void mouseClicked(MouseEvent e) {
 void mouseDragged() {
   if (winnum==1) {
     if (mouseY<600&&mouseY>0&&mouseX<800&&mouseX>0) {
-      mapselectedX=mouseX/50;
-      mapselectedY=mouseY/50;
+      selX=mouseX/50;
+      selY=mouseY/50;
     }
   }
 }

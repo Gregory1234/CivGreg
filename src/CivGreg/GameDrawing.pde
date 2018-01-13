@@ -1,37 +1,37 @@
-void showgame() {
+void drawGame() {
   try {
     for (int x = 0; x<16; x++) {
       for (int y = 0; y<12; y++) {
         fill(255);
-        if (x==mapselectedX&&y==mapselectedY) {
+        if (x==selX&&y==selY) {
           fill(205);
         }
         if (map[x][y].owner==1) {
           fill(255, 0, 0);
-          if (x==mapselectedX&&y==mapselectedY&&map[x][y].owner==playernumber) {
+          if (x==selX&&y==selY&&map[x][y].owner==playernumber) {
             fill(255, 100, 100);
-          } else if (map[x][y].owner!=playernumber&&!(x==mapselectedX&&y==mapselectedY)) {
+          } else if (map[x][y].owner!=playernumber&&!(x==selX&&y==selY)) {
             fill(205, 0, 0);
           }
         } else if (map[x][y].owner==2) {
           fill(0, 0, 255);
-          if (x==mapselectedX&&y==mapselectedY&&map[x][y].owner==playernumber) {
+          if (x==selX&&y==selY&&map[x][y].owner==playernumber) {
             fill(100, 100, 255);
-          } else if (map[x][y].owner!=playernumber&&!(x==mapselectedX&&y==mapselectedY)) {
+          } else if (map[x][y].owner!=playernumber&&!(x==selX&&y==selY)) {
             fill(0, 0, 205);
           }
         } else if (map[x][y].owner==3) {
           fill(0, 255, 0);
-          if (x==mapselectedX&&y==mapselectedY&&map[x][y].owner==playernumber) {
+          if (x==selX&&y==selY&&map[x][y].owner==playernumber) {
             fill(100, 255, 100);
-          } else if (map[x][y].owner!=playernumber&&!(x==mapselectedX&&y==mapselectedY)) {
+          } else if (map[x][y].owner!=playernumber&&!(x==selX&&y==selY)) {
             fill(0, 205, 0);
           }
         } else if (map[x][y].owner==4) {
           fill(255, 255, 0);
-          if (x==mapselectedX&&y==mapselectedY&&map[x][y].owner==playernumber) {
+          if (x==selX&&y==selY&&map[x][y].owner==playernumber) {
             fill(255, 255, 100);
-          } else if (map[x][y].owner!=playernumber&&!(x==mapselectedX&&y==mapselectedY)) {
+          } else if (map[x][y].owner!=playernumber&&!(x==selX&&y==selY)) {
             fill(205, 205, 0);
           }
         }
@@ -39,7 +39,7 @@ void showgame() {
       }
     }
     drawTextures();
-    showActions();
+    drawActions();
   }
   catch(Exception e) {
   }
@@ -133,16 +133,16 @@ void drawTextures() {
   }
 }
 
-void showActions() {
+void drawActions() {
   fill(255);
   rect(10, 625, 350, 30);
   fill(0);
   textSize(25);
-  text("Coordinates : "+mapselectedX+", "+mapselectedY, 15, 650);
+  text("Coordinates : "+selX+", "+selY, 15, 650);
   textSize(15);
-  text("Population : "+map[mapselectedX][mapselectedY].population, 10, 670);
-  text("Terrain type : "+map[mapselectedX][mapselectedY].terrain, 10, 690);
-  text("Owner : "+players[(map[mapselectedX][mapselectedY].owner)], 10, 710);
+  text("Population : "+map[selX][selY].population, 10, 670);
+  text("Terrain type : "+map[selX][selY].terrain, 10, 690);
+  text("Owner : "+players[(map[selX][selY].owner)], 10, 710);
 
 
   fill(255);
@@ -168,7 +168,7 @@ void showActions() {
   if (!classicMode) {
     text("-", 378, 705);
     text("+", 378+150-20, 705);
-    text("Fort :"+map[mapselectedX][mapselectedY].fort, 378+20, 705);
+    text("Fort :"+map[selX][selY].fort, 378+20, 705);
     //text("Build",380,735);
   }
   fill(255);

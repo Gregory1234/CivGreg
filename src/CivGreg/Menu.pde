@@ -1,6 +1,6 @@
 
 
-void showmenu() {
+void drawMenu() {
   textSize(32);
   fill(255);
   rect(300, 337, 200, 35);
@@ -11,7 +11,7 @@ void showmenu() {
   text("Load Game", 300, 410);
 }
 
-void showcreatemenu() {
+void drawCreatingMenu() {
   textSize(32);
   fill(255);
   rect(300, 337, 300, 35);
@@ -30,7 +30,7 @@ void showcreatemenu() {
   textSize(20);
   text("-", 378, 705);
   text("+", 378+150-20, 705);
-  text("Players :"+playersNumber, 378+20, 705);
+  text("Players : "+playersNumber, 378+20, 705);
   text("Water", 380, 705+30);
   textSize(32);
 }
