@@ -35,26 +35,22 @@ void nextTurn() {
   saveGame("Auto");
 }
 
-void buildFortsAction() {
-  if (mouseX>375&&mouseX<395) {
-    if (mouseY>685&&mouseY<685+25) {
-      if (map[selX][selY].owner==playernumber) {
-        if (map[selX][selY].fort>0&&playerMoves>=map[selX][selY].fort-1) {
-          map[selX][selY].fort--;
-          playerMoves-=map[selX][selY].fort;
-        }
-      }
-    }
+void clickActions() {
+  buildFortsAction();
+  if (attackButton.check()){
+    attackSelectedAction();
   }
+  movePeopleFromSelectedAction();
+}
 
-  if (mouseX>375+150-20&&mouseX<395+150) {
-    if (mouseY>685&&mouseY<685+25) {
-      if (map[selX][selY].owner==playernumber) {
-        if (playerMoves>=map[selX][selY].fort+1) {
-          map[selX][selY].fort++;
-          playerMoves-=map[selX][selY].fort;
-        }
-      }
+void buildFortsAction() {
+  int change = fortSel.change();
+  if(change==0)
+    return;
+  if (map[selX][selY].owner==playernumber) {
+    if (map[selX][selY].fort>0&&playerMoves>=map[selX][selY].fort+change) {
+      map[selX][selY].fort+=change;
+      playerMoves-=map[selX][selY].fort+change;
     }
   }
 }
@@ -136,19 +132,19 @@ void attackSelectedAction() {
 }
 void movePeopleFromSelectedAction() {
   if (map[selX][selY].owner==playernumber&&map[selX][selY].population>=100) {
-    if (selX>0 && map[selX-1][selY].owner==playernumber&&mouseX<375+38) {
+    if (selX>0 && map[selX-1][selY].owner==playernumber&&moveLeftButton.check()) {
       map[selX-1][selY].population+=100;
       map[selX][selY].population-=100;
       playerMoves--;
-    } else if (selY<11 && map[selX][selY+1].owner==playernumber&&mouseX<375+38+37&&mouseX>375+38) {
+    } else if (selY<11 && map[selX][selY+1].owner==playernumber&&moveDownButton.check()) {
       map[selX][selY].population-=100;
       map[selX][selY+1].population+=100;
       playerMoves--;
-    } else if (selX<15 && map[selX+1][selY].owner==playernumber&&mouseX<375+38+37+38&&mouseX>375+38+37) {
+    } else if (selX<15 && map[selX+1][selY].owner==playernumber&&moveRightButton.check()) {
       map[selX+1][selY].population+=100;
       map[selX][selY].population-=100;
       playerMoves--;
-    } else if (selY>0 && map[selX][selY-1].owner==playernumber&&mouseX>375+38+37+38) {
+    } else if (selY>0 && map[selX][selY-1].owner==playernumber&&moveUpButton.check()) {
       map[selX][selY-1].population+=100;
       map[selX][selY].population-=100;
       playerMoves--;

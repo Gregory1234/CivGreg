@@ -143,13 +143,20 @@ class NumberSelect extends Button {
       textAlign(LEFT);
     }
   }
-  int update(int X, int Y) {
+  int change(int X, int Y) {
     if (X>x&&X<x+csize&&Y>y&&Y<y+h)
       if(number>min)
-        number--;
+        return -1;
     if (X>x+w-csize&&X<x+w&&Y>y&&Y<y+h)
       if(number<max)
-        number++;
+        return 1;
+    return 0;
+  }
+  int change() {
+    return update(mouseX, mouseY);
+  }
+  int update(int X, int Y) {
+    number+=change(X,Y);
     return number;
   }
   int update() {

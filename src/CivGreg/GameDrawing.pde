@@ -136,6 +136,11 @@ void drawTextures() {
 }
 
 Button attackButton = new Button(375,625,150,25,"Attack",20);
+Button moveLeftButton = new Button(375,655,38,25,"left",13,GTextModeMenu.CENTER);
+Button moveDownButton = new Button(375+38,655,38,25,"down",13,GTextModeMenu.CENTER);
+Button moveRightButton = new Button(375+38+37,655,38,25,"right",13,GTextModeMenu.CENTER);
+Button moveUpButton = new Button(375+38+37+38,655,38,25,"up",13,GTextModeMenu.CENTER);
+NumberSelect fortSel = new NumberSelect(375,685,150,25,"Fort : @",20,0,20);
 
 void drawActions() {
   fill(255);
@@ -149,27 +154,14 @@ void drawActions() {
   text("Owner : "+players[(map[selX][selY].owner)], 10, 710);
 
   attackButton.draw();
-  fill(255);
-  //rect(375, 625, 150, 25);
-  rect(375, 655, 38, 25);
-  rect(375+38, 655, 37, 25);
-  rect(375+38+37, 655, 38, 25);
-  rect(375+38+37+38, 655, 37, 25);
-  rect(375, 685, 150, 25);
-  rect(375, 685, 20, 25);
-  rect(375+150-20, 685, 20, 25);
+  moveLeftButton.draw();
+  moveDownButton.draw();
+  moveRightButton.draw();
+  moveUpButton.draw();
+  fortSel.number=map[selX][selY].fort;
+  fortSel.draw();
   fill(0);
   textSize(20);
-  //text("Attack", 380, 645);
-  textSize(10);
-  text("left", 378, 675);
-  text("down", 378+38, 675);
-  text("right", 378+38+37, 675);
-  text("up", 378+38+37+38, 675);
-  textSize(20);
-  text("-", 378, 705);
-  text("+", 378+150-20, 705);
-  text("Fort :"+map[selX][selY].fort, 378+20, 705);
   fill(255);
   rect(670, 600, 130, 200);
   fill(0);
@@ -177,19 +169,4 @@ void drawActions() {
   text("New Turn", 675, 720);
   textSize(20);
   text("Moves :"+playerMoves+"\n"+players[playernumber], 675, 760);
-}
-void clickActions() {
-  buildFortsAction();
-  //action attack
-  if (mouseX>375&&mouseX<375+150) {
-    if (mouseY>625&&mouseY<650) {
-      attackSelectedAction();
-    }
-  }
-  //move people action
-  if (mouseX>375&&mouseX<375+150) {
-    if (mouseY>655&&mouseY<655+25) {
-      movePeopleFromSelectedAction();
-    }
-  }
 }
