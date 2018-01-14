@@ -151,11 +151,9 @@ void drawActions() {
   rect(375+38, 655, 37, 25);
   rect(375+38+37, 655, 38, 25);
   rect(375+38+37+38, 655, 37, 25);
-  if (!classicMode) {
-    rect(375, 685, 150, 25);
-    rect(375, 685, 20, 25);
-    rect(375+150-20, 685, 20, 25);
-  }
+  rect(375, 685, 150, 25);
+  rect(375, 685, 20, 25);
+  rect(375+150-20, 685, 20, 25);
   fill(0);
   textSize(20);
   text("Attack", 380, 645);
@@ -165,12 +163,9 @@ void drawActions() {
   text("right", 378+38+37, 675);
   text("up", 378+38+37+38, 675);
   textSize(20);
-  if (!classicMode) {
-    text("-", 378, 705);
-    text("+", 378+150-20, 705);
-    text("Fort :"+map[selX][selY].fort, 378+20, 705);
-    //text("Build",380,735);
-  }
+  text("-", 378, 705);
+  text("+", 378+150-20, 705);
+  text("Fort :"+map[selX][selY].fort, 378+20, 705);
   fill(255);
   rect(670, 600, 130, 200);
   fill(0);
@@ -180,9 +175,7 @@ void drawActions() {
   text("Moves :"+playerMoves+"\n"+players[playernumber], 675, 760);
 }
 void clickActions() {
-  if (!classicMode) {
-    buildFortsAction();
-  }
+  buildFortsAction();
   //action attack
   if (mouseX>375&&mouseX<375+150) {
     if (mouseY>625&&mouseY<650) {

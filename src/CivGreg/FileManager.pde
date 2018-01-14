@@ -34,7 +34,7 @@ void loadImages() {
 
 void saveGame(String filename) {
   String[] filetosave = new String[12*16+1];
-  filetosave[0]= playernumber+"@nx@"+playerMoves+"@nx@"+(classicMode?"classic":"normal")+"@nx@"+playersNumber;
+  filetosave[0]= playernumber+"@nx@"+playerMoves+"@nx@"+playersNumber;
   for (int x = 0; x<16; x++) {
     for (int y = 0; y<12; y++) {
       filetosave[x*12+y+1]= map[x][y].population+"@nx@"+map[x][y].owner+"@nx@"+map[x][y].terrain+"@nx@"+map[x][y].fort;
@@ -48,8 +48,7 @@ void loadGame(String filename) {
   int[] mainrow = int(maploaded[0].split("@nx@"));
   playernumber = mainrow[0];
   playerMoves = mainrow[1];
-  classicMode = (maploaded[0].split("@nx@"))[2].equals("classic");
-  playersNumber = mainrow[3];
+  playersNumber = mainrow[2];
   for (int i = 1; i<maploaded.length; i++) {
     String[] row = maploaded[i].split("@nx@");
     int x=((i-1)-((i-1)%12))/12;

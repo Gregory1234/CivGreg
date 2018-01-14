@@ -20,13 +20,6 @@ void draw() {
     drawMenu();
     break;
   case 1:
-    if (classicMode) {
-      for (int x = 0; x<16; x++) {
-        for (int y = 0; y<12; y++) {
-          map[x][y].fort = 0;
-        }
-      }
-    }
     drawGame();
     break;
   case 2:
@@ -61,12 +54,6 @@ void mouseClicked(MouseEvent e) {
       if (mouseX>300&&mouseY>337&&mouseX<600&&mouseY<337+35) {
         initMap();
         winnum=1;
-      } else if (mouseX>300&&mouseY>377&&mouseX<600&&mouseY<377+35) {
-
-        classicMode = true;
-        initMap();
-
-        winnum=1;
       }
       if (mouseX>375&&mouseX<395) {
         if (mouseY>685&&mouseY<685+25) {
@@ -81,12 +68,6 @@ void mouseClicked(MouseEvent e) {
           if (playersNumber<5) {
             playersNumber++;
           }
-        }
-      }
-
-      if (mouseX>375&&mouseX<395+150) {
-        if (mouseY>685+30&&mouseY<685+25+30) {
-          isWater=!isWater;
         }
       }
     }

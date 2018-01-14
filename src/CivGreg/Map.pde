@@ -14,10 +14,8 @@ void initMap() {
   for (int x = 0; x<16; x++) {
     for (int y = 0; y<12; y++) {
       String terrain = "Plains";
-      if (isWater) {
-        if (floor(random(10))==1) {
-          terrain = "Water";
-        }
+      if (floor(random(10))==1) {
+        terrain = "Water";
       }
       map[x][y]=new Province(0, 0, terrain, 0);
     }
