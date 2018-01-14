@@ -32,9 +32,9 @@ void mouseClicked(MouseEvent e) {
   if (clickDelay == 0) {
     clickDelay = 1;
     if (winnum==0) {
-      if (mouseX>300&&mouseY>337&&mouseX<500&&mouseY<337+35) {
+      if (newGameButton.check()) {
         winnum=2;
-      } else if (mouseX>300&&mouseY>377&&mouseX<500&&mouseY<377+35) {
+      } else if (loadGameButton.check()) {
         loadGame("Auto");
       }
     } else if (winnum==1) {
@@ -51,25 +51,11 @@ void mouseClicked(MouseEvent e) {
         }
       }
     } else if (winnum==2) {
-      if (mouseX>300&&mouseY>337&&mouseX<600&&mouseY<337+35) {
+      if (playButton.check()) {
         initMap();
         winnum=1;
       }
-      if (mouseX>375&&mouseX<395) {
-        if (mouseY>685&&mouseY<685+25) {
-          if (playersNumber>2) {
-            playersNumber--;
-          }
-        }
-      }
-
-      if (mouseX>375+150-20&&mouseX<395+150) {
-        if (mouseY>685&&mouseY<685+25) {
-          if (playersNumber<5) {
-            playersNumber++;
-          }
-        }
-      }
+      playersNumber=playerNumberSel.update();
     }
   }
   if (e.getCount()==2) {

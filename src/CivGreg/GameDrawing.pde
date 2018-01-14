@@ -1,3 +1,5 @@
+
+
 void drawGame() {
   try {
     for (int x = 0; x<16; x++) {
@@ -133,6 +135,8 @@ void drawTextures() {
   }
 }
 
+Button attackButton = new Button(375,625,150,25,"Attack",20);
+
 void drawActions() {
   fill(255);
   rect(10, 625, 350, 30);
@@ -144,9 +148,9 @@ void drawActions() {
   text("Terrain type : "+map[selX][selY].terrain, 10, 690);
   text("Owner : "+players[(map[selX][selY].owner)], 10, 710);
 
-
+  attackButton.draw();
   fill(255);
-  rect(375, 625, 150, 25);
+  //rect(375, 625, 150, 25);
   rect(375, 655, 38, 25);
   rect(375+38, 655, 37, 25);
   rect(375+38+37, 655, 38, 25);
@@ -156,7 +160,7 @@ void drawActions() {
   rect(375+150-20, 685, 20, 25);
   fill(0);
   textSize(20);
-  text("Attack", 380, 645);
+  //text("Attack", 380, 645);
   textSize(10);
   text("left", 378, 675);
   text("down", 378+38, 675);
